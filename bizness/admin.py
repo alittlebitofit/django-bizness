@@ -10,6 +10,4 @@ class CardDescriptionInline(admin.TabularInline):
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
     inlines = [CardDescriptionInline]
-
-    class Media:
-        js = ('bizness/js/custom.js',)
+    list_display = ("title", 'price', 'get_description')
