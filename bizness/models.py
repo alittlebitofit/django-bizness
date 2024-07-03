@@ -39,7 +39,7 @@ class Subscription(models.Model):
 
     email = models.EmailField(max_length=254, blank=True)
     card = models.OneToOneField(Card, on_delete=models.PROTECT)
-    message = models.TextField()
+    message = models.TextField(default='', blank=True)
 
 
     def __str__(self):

@@ -1,15 +1,13 @@
 from django.shortcuts import render
 
 # Create your views here.
-from bizness.models import Subscription
+from bizness.models import Subscription, Card
 from bizness.forms import SubscriptionModelForm
 
 
 def index(request):
-	"""View function for renewing a specific BookInstance by librarian."""
-	
-    #TODO: i don't think I actually need this statement as it is not updating anything, its posting data, i.e. creating data for the first time.
-	book_instance = get_object_or_404(BookInstance, pk=pk)
+	"""View function for handling user subscription."""
+	context = {}
 
 	# If this is a POST request then process the Form data
 	if request.method == 'POST':
@@ -19,8 +17,8 @@ def index(request):
 
 		# Check if the form is valid:
 		if form.is_valid():
-			# process the data in form.cleaned_data as required (here we just write it to the model due_back field)
-			
+			# process the data in form.cleaned_data as required
+
             #TODO: need to store card data from form
 			subscriber = Subscription(
 				first_name = form.cleaned_data['first_name'],
@@ -38,18 +36,22 @@ def index(request):
 
 	# If this is GET (or any other method) create the default form.
 	else:
-		#TODO: need to do something else if its a GET request
-		#TODO: Maybe message should be optional, so change the model first and run migrations
 		form = SubscriptionModelForm(
 			initial = {
 				'message': "If there's anything else you would like us to know..."
 			}
 		)
 
-    #TODO: need to pass context for form errors or initial values
-	context = {
+		#Since this is a GET request I need to pass all three card data to the user
+		cards = Card.objects.all()
+		context.update({
+			'cards': cards,
+		})
+
+
+	context.update({
 		'form': form,
-	}
+	})
 
     #TODO: pass the valid template
 	return render(request, 'catalog/book_renew_librarian.html', context)
