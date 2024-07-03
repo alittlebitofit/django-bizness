@@ -34,11 +34,19 @@ class CardDescription(models.Model):
 
 
 
+from django.core.validators import RegexValidator
 
 class Subscription(models.Model):
-    first_name
-    last_name
-    mob_number
-    email_id
-    card
-    message
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+
+    phone_regex = RegexValidator(regex=r'^\d{10}$', message="Phone number must be entered in the format: '+919876543210'.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=True) # Validators should be a list
+
+    email = models.EmailField(max_length=254, blank=True)
+    card = models.OneToOneField(Card, on_delete=models.PROTECT)
+    message = models.TextField()
+
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'

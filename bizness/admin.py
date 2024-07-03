@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Card, CardDescription
+from .models import Card, CardDescription, Subscription
 
 class CardDescriptionInline(admin.TabularInline):
     model = CardDescription
@@ -11,3 +11,8 @@ class CardDescriptionInline(admin.TabularInline):
 class CardAdmin(admin.ModelAdmin):
     inlines = [CardDescriptionInline]
     list_display = ("title", 'price', 'get_description')
+
+
+@admin.register(Subscription)
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ("first_name", "last_name", "card")
