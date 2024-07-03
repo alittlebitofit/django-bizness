@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<form id="subscriptionForm" method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Submit</button>
+</form>
+
+{% endblock %}
+
+{% block script %}
+{% load static %}
+<script src="{% static 'bizness/js/index.js' %}"></script>
+{% endblock %}
