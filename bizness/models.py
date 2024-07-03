@@ -22,15 +22,9 @@ class Card(models.Model):
 
 
 
-
-
-
 class CardDescription(models.Model):
     card = models.ForeignKey(Card, related_name='descriptions', on_delete=models.CASCADE)
     description = models.TextField()
-
-
-
 
 
 
