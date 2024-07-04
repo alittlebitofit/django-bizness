@@ -10,4 +10,5 @@ class SubscriptionModelForm(ModelForm):
         fields = ["first_name", "last_name", "phone_number", "email", "card", "message"]
         widgets = {
             'card': forms.RadioSelect,
+            'message': forms.Textarea(attrs={'placeholder': "If there's anything else you would like us to know..."})
         }

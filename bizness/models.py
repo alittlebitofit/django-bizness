@@ -34,11 +34,11 @@ class Subscription(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
 
-    phone_regex = RegexValidator(regex=r'^\d{10}$', message="Phone number must be entered in the format: '+919876543210'.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=True) # Validators should be a list
+    phone_regex = RegexValidator(regex=r'^\d{10}$', message="Phone number must be entered in the format: '9876543210'.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=10) # Validators should be a list
 
-    email = models.EmailField(max_length=254, blank=True)
-    card = models.OneToOneField(Card, on_delete=models.PROTECT)
+    email = models.EmailField(max_length=254)
+    card = models.ForeignKey(Card, on_delete=models.PROTECT)
     message = models.TextField(default='', blank=True)
 
 

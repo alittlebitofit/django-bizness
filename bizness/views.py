@@ -35,7 +35,11 @@ def index(request):
 			subscriber.save()
 			print("fgdfgfgf")
 
-			return JsonResponse(status=201)
+			context = {
+				'form': SubscriptionModelForm(),
+			}
+
+			return render(request, "bizness/index.html", context, status=201)
 		
 		print(form.errors)
 
@@ -45,13 +49,9 @@ def index(request):
 		print("FOUR")
 		cards = Card.objects.all()
 
-		form = SubscriptionModelForm(
-            initial = {
-                'message': "If there's anything else you would like us to know..."
-            }
-        )
+		form = SubscriptionModelForm()
 		
-		form.fields['card'].queryset = cards
+		# form.fields['card'].queryset = cards
 
 
 	context = {
