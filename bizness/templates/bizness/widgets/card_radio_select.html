@@ -1,0 +1,19 @@
+{% for group, options, index in widget.optgroups %}
+    {% for option in options %}
+        {% with card=option.instance %}
+            <div class="card-container">
+                <label>
+                    <input type="radio" name="{{ widget.name }}" value="{{ option.value }}" {% if option.selected %}checked{% endif %} {% include "django/forms/widgets/attrs.html" %}>
+                    <div class="card">
+                        <div class="card-header">{{ card.title }}</div>
+                        <div class="card-body">
+                            {% for description in card.descriptions.all %}
+                                <div class="card-description">{{ description.description }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </label>
+            </div>
+        {% endwith %}
+    {% endfor %}
+{% endfor %}

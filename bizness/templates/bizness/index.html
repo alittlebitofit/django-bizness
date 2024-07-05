@@ -1,9 +1,15 @@
 {% extends "base_generic.html" %}
 
+{% block style %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bizness/css/styles.css' %}">
+{% endblock %}
+
 {% block content %}
 
-<form id="subscriptionForm" method="post">
+<form method="post">
 	{% csrf_token %}
+	
 	{{ form.as_p }}
 	<button type="submit">Submit</button>
 </form>
