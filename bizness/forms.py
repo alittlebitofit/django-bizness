@@ -13,10 +13,12 @@ class SubscriptionModelForm(ModelForm):
     class Meta:
         model = Subscription
         fields = ["first_name", "last_name", "phone_number", "email", "card", "message"]
-        widgets = {
-            'card': forms.RadioSelect(attrs={'class': 'radio-select'}),
-            'message': forms.Textarea(attrs={'placeholder': "If there's anything else you would like us to know..."})
-        }
+        # widgets = {
+        #     'card': forms.RadioSelect(),
+        #     'message': forms.Textarea(attrs={'placeholder': "If there's anything else you would like us to know..."})
+        # }
+        
+		# card = forms.ModelChoiceField(queryset=Card.objects.all())
 
     # def __init__(self, *args, **kwargs):
     #     user = kwargs.pop('user', None)

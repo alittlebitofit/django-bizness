@@ -35,17 +35,13 @@ def index(request):
 				'form': form,
 			}
 
-			return render(request, "bizness/index.html", context, status=201)
+			return render(request, "bizness/index.html", context)
+		
+		print("FAILURE1")
 		
 	# If this is GET (or any other method) create the default form and pass all the cards
 	else:
-		
-		# cards = Card.objects.all()
-
 		form = SubscriptionModelForm()
-		
-		# form.fields['card'].queryset = cards
-
 
 	context = {
 		'form': form,

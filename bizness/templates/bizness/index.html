@@ -9,8 +9,75 @@
 
 <form method="post">
 	{% csrf_token %}
+
+
+	<!-- {{ form.as_p }} -->
 	
-	{{ form.as_p }}
+
+	<ul class="errorlist"><li>This field is required.</li></ul>
+	<p>
+		<label for="id_first_name">First name:</label>
+		<input type="text" name="first_name" maxlength="100" required aria-invalid="true" id="id_first_name">
+	</p>
+
+	<ul class="errorlist"><li>This field is required.</li></ul>
+	<p>
+		<label for="id_last_name">Last name:</label>
+		<input type="text" name="last_name" maxlength="100" required aria-invalid="true" id="id_last_name">
+	</p>
+
+	<ul class="errorlist"><li>This field is required.</li></ul>
+	<p>
+		<label for="id_phone_number">Phone number:</label>
+		<input type="text" name="phone_number" maxlength="10" required aria-invalid="true" id="id_phone_number">
+	</p>
+
+	<ul class="errorlist"><li>This field is required.</li></ul>
+	<p>
+		<label for="id_email">Email:</label>
+		<input type="email" name="email" maxlength="254" required aria-invalid="true" id="id_email">
+	</p>
+
+
+
+
+
+<!-- END -->
+	
+	<!-- Display error for card selection -->
+	{% if form.card.errors %}
+		<div class="error">{{ form.card.errors }} </div>
+	{% endif %}
+
+	<!-- Render card selection as radio buttons -->
+	{% for card in form.card.field.queryset %}
+		<div class="card-selection">
+			<input type="radio" id="card_{{ card.id }}" name="{{ form.card.html_name }}" value="{{ card.id }}" required=True>
+			<label for="card_{{ card.id }}">
+				<div class="card-title">{{ card.title }}</div>
+			</label>
+
+			{% if card.descriptions.exists %}
+				<ul class="descriptions-points">
+					{% for description in card.descriptions.all %}
+						<li>{{ description.description }}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<p>No bullet points available for this card.</p>
+			{% endif %}
+		</div>
+	{% endfor %}
+
+	
+
+	<p>
+		<label for="id_message">Message:</label>
+		<textarea name="message" cols="40" rows="10" placeholder="If there&#x27;s anything else you would like us to know..." id="id_message"></textarea>
+	</p>
+
+
+
 	<button type="submit">Submit</button>
 </form>
 

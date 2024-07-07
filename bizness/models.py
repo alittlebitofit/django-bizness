@@ -23,8 +23,11 @@ class Card(models.Model):
 
 
 class CardDescription(models.Model):
-    card = models.ForeignKey(Card, related_name='descriptions', on_delete=models.CASCADE)
-    description = models.TextField()
+	card = models.ForeignKey(Card, related_name='descriptions', on_delete=models.CASCADE)
+	description = models.TextField()
+    
+	def __str__(self):
+		return f"{self.card} -> {self.description}"
 
 
 

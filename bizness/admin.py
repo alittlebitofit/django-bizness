@@ -16,3 +16,5 @@ class CardAdmin(admin.ModelAdmin):
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ("first_name", "last_name", "card")
+
+admin.site.register(CardDescription)
